@@ -1,3 +1,5 @@
+import 'networking.dart';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +30,16 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+const bitcoinAverageURL =
+    'https://apiv2.bitcoinaverage.com/indices/global/ticker';
+
+class CoinData {
+  Future<dynamic> getBitcoinCourse(String currency) async {
+    NetworkHelper networkHelper =
+        NetworkHelper('$bitcoinAverageURL/BTC$currency');
+
+    var bitcoinCourse = await networkHelper.getData();
+
+    return bitcoinCourse;
+  }
+}
